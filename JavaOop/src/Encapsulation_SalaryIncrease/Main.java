@@ -1,6 +1,6 @@
 package Encapsulation_SalaryIncrease;
 
-import Encapsulation_Lab_01_SortByName.Person;
+import Encapsulation_SalaryIncrease.Person;
 
 import java.io.IOException;
 import java.util.ArrayList;
