@@ -11,54 +11,20 @@ public class Smartphone implements Browsable, Callable {
         this.urls = urls;
     }
 
-
-    public List<String> getNumbers() {
-        return numbers;
-    }
-
-    public void setNumbers(List<String> numbers) {
-        this.numbers = numbers;
-    }
-
-    public List<String> getUrls() {
-        return urls;
-    }
-
-    public void setUrls(List<String> urls) {
-        this.urls = urls;
-    }
-
     @Override
-    public String call() {
-        return null;
-    }
-/*
-    @Override
-    public String call() {
-        char[] inputArr = number.toCharArray();
+    public String browse(List<String> urls) {
         StringBuilder sb = new StringBuilder();
-        for (char symbol : inputArr) {
-            if (Character.isDigit(symbol)) {
-                sb.append(symbol);
-            } else {
-                sb.append("Invalid number!");
-                sb.append(System.lineSeparator());
-            }
-        }
-        if (!sb.equals("Invalid number!")) {
-            sb.delete(0, sb.length() - 1);
-            sb.append(String.format("Calling... %s%n", number));
-        }
-        return sb.toString();
-    }*/
-
-
-    @Override
-    public String browse() {
-        //NO DIGITS
-        StringBuilder sb = new StringBuilder();
+        boolean isValid = false;
         for (String url : urls) {
-            if (hasDigits(url)) {
+            for (char singleChar : url.toCharArray()) {
+                if (!Character.isDigit(singleChar)) {
+                    isValid = true;
+                } else {
+                    isValid = false;
+                    break;
+                }
+            }
+            if (isValid == false) {
                 sb.append("Invalid URL!").append(System.lineSeparator());
             } else {
                 sb.append(String.format("Browsing: %s!%n", url));
@@ -67,12 +33,25 @@ public class Smartphone implements Browsable, Callable {
         return sb.toString().trim();
     }
 
-    private boolean hasDigits(String url) {
-        for (char singleChar : url.toCharArray()) {
-            if (Character.isDigit(singleChar)) {
-                return true;
+    @Override
+    public String call() {
+        StringBuilder sb = new StringBuilder();
+        for (String number : numbers) {
+            if (hasOnlyDigits(number)) {
+                sb.append(String.format("Calling... %s%n", number));
+            } else {
+                sb.append("Invalid number!").append(System.lineSeparator());
             }
         }
-        return false;
+        return sb.toString().trim();
+    }
+
+    private boolean hasOnlyDigits(String number) {
+        for (char singleChar : number.toCharArray()) {
+            if (!Character.isDigit(singleChar)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

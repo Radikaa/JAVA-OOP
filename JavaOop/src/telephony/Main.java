@@ -13,6 +13,6 @@ public class Main {
         List<String> urls = Arrays.stream(scanner.nextLine().split(" ")).collect(Collectors.toList());
         Smartphone smartphone = new Smartphone(phoneNumbers, urls);
         System.out.println(smartphone.call());
-        System.out.println(smartphone.browse());
+        System.out.println(smartphone.browse(urls));
     }
 }

@@ -1,5 +1,8 @@
 package telephony;
 
+import java.util.List;
+
 public interface Browsable {
-    String browse();
+    String browse(List<String> urls);
+
 }
